@@ -29,4 +29,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/prpo-app-boolean:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/prpo-app-kosilo:latest
