@@ -79,7 +79,7 @@ async def create(with_arg: PostKosilo, authorization: str | None = Header(defaul
         start_str = start_time.strftime("%H:%M:%S")
         async with httpx.AsyncClient() as client:
             response = await client.post(
-                f"{EV_URL}/urniki/{with_arg.uporabnik_id}/novTermin",
+                f"{EV_URL}/urniki/{with_arg.uporabnik_id}/termini",
                 headers={"Authorization": authorization}, 
                 json={
                     "termin_id": None,
