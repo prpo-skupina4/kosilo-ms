@@ -16,7 +16,7 @@ def health():
 
 async def get_timetable(users: list[int]):
     async with httpx.AsyncClient() as client:
-        response = await client.post(f"{BOOL_URL}/combine", json={"user_ids": users})
+        response = await client.post(f"{BOOL_URL}/", json={"user_ids": users})
         response.raise_for_status()
         return response.json()
 
