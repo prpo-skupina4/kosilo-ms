@@ -61,7 +61,7 @@ def test_create_endpoint_success(httpx_mock):
     
     # Mock the response from BOOL_URL (boolean service)
     httpx_mock.add_response(
-        url=f"{BOOL_URL}/combine",
+        url=f"{BOOL_URL}/",
         method="POST",
         json=[
             {
