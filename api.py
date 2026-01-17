@@ -24,12 +24,12 @@ async def get_timetable(users: list[int]):
 def addTime(a, b):
     return (datetime.combine(date.today(), a) + b).time()
 
-from datetime import time
 
 def parse_time(t):
     if isinstance(t, time):
         return t
     return datetime.strptime(t, "%H:%M:%S").time()
+
 
 async def find_available_slot(timetable, duration: int, day: int):
     lunch_duration = timedelta(minutes=duration)
@@ -63,8 +63,10 @@ async def find_available_slot(timetable, duration: int, day: int):
     return None
 
 
-@router.post("/create")
-async def create(with_arg: PostKosilo, authorization: str | None = Header(default=None)):
+@router.post("/")
+async def create(
+    with_arg: PostKosilo, authorization: str | None = Header(default=None)
+):
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing Authorization header")
     timetable = await get_timetable(with_arg.udelezenci)
@@ -80,7 +82,7 @@ async def create(with_arg: PostKosilo, authorization: str | None = Header(defaul
         async with httpx.AsyncClient() as client:
             response = await client.post(
                 f"{EV_URL}/urniki/{with_arg.uporabnik_id}/termini",
-                headers={"Authorization": authorization}, 
+                headers={"Authorization": authorization},
                 json={
                     "termin_id": None,
                     "zacetek": start_str,
